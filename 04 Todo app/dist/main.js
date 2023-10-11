@@ -1,21 +1,34 @@
-import Todo from './Todo.js';
+// import  Todo  from './Todo.js';
 import TodoList from './TodoList.js';
 import inquirer from 'inquirer';
 const todoList = new TodoList();
 const main = async () => {
-    const answer = await inquirer.prompt({
-        type: 'input',
-        name: 'title',
-        message: 'Enter a new todo:',
-    });
-    const newTodo = new Todo(answer.title);
-    todoList.addTodo(newTodo);
-    console.log('Todo added successfully!');
-    // Display the current todos
-    const currentTodos = todoList.getTodos();
-    console.log('\nCurrent Todos:');
-    currentTodos.forEach((todo, index) => {
-        console.log(`${index + 1}. ${todo.title} - ${todo.completed ? 'Completed' : 'Incomplete'}`);
-    });
+    while (true) {
+        // console.clear();
+        const { action } = await inquirer.prompt({
+            type: 'list',
+            name: 'action',
+            message: 'Choose an action:',
+            choices: ['Add Todo', 'Update Todo', 'Delete Todo', 'Show Todos', 'Exit']
+        });
+        switch (action) {
+            case 'Add Todo':
+                await todoList.addTodo();
+                ;
+                break;
+            case 'Update Todo':
+                await todoList.updateTodo();
+                break;
+            case 'Delete Todo':
+                await todoList.deleteTodo();
+                break;
+            case 'Show Todos':
+                todoList.showTodos();
+                break;
+            case 'Exit':
+                process.exit();
+                break;
+        }
+    }
 };
 main();

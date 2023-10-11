@@ -1,4 +1,4 @@
-// models/Todo.ts
+// Todo.ts
 export default class Todo {
     title;
     completed;
