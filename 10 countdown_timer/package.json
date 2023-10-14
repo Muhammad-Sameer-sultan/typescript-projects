@@ -1,0 +1,22 @@
+{
+  "name": "countdown_timer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nanospinner": "^1.1.0",
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.4",
+    "@types/readline-sync": "^1.4.5",
+    "inquirer": "^9.2.11"
+  }
+}
