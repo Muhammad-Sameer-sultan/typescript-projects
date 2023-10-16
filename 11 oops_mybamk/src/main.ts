@@ -1,30 +1,26 @@
-#!/usr/bin/env nodeShowAccountBalance
-
 import inquirer from "inquirer";
-import { createSpinner } from "nanospinner";
-import chalk from "chalk";
-import { Customer } from "./classes/cutomer.js"; // Update the path to match your file structure
-import { DisplayInfo, ShowAccountBalance, Credit, Debit, TransactionHistory } from "./customerOptions.js";
+import { createSpinner}  from "nanospinner";
+import chalk from 'chalk'
+import  Customer  from "./classes/customer.js"; // Update the path to match your file structure
+import { DisplayInfo, ShowAccountBalance, Credit, Debit, TransactionHistory } from "./cutomeroption.js";
 
 const sleep = () => new Promise((r) => setTimeout(r, 2000));
 
-console.log(chalk.bold.rgb(204, 204, 204)(`\n   <<<=================================>>>`));
-console.log(chalk.bold.rgb(204, 204, 204)(`<<<===========>>>  ${chalk.redBright.bold('MY BANK')}  <<<===========>>>`));
-console.log(chalk.bold.rgb(204, 204, 204)(`   <<<=================================>>>\n`));
+console.log(chalk.bold.rgb(204, 204, 204)(`<<<===========>>>  ${chalk.redBright.bold('MY BANK Managment System')}  <<<===========>>>`));
 
 let customers: Customer[] = [];
 
 async function choice(): Promise<'C' | 'S'> {
-  const { option }: { option: 'C' | 'S' } = await inquirer.prompt([
-    {
-      name: "option",
-      message: 'What Would You Like To Do ?',
-      type: 'list',
-      choices: [{ name: 'Create New Account', value: 'C' }, { name: 'Sign In', value: 'S' }],
-    },
-  ]);
-  return option;
-}
+      const { option }: { option: 'C' | 'S' } = await inquirer.prompt([
+        {
+          type: 'list',
+          name: "option",
+          message: 'What Would You Like To Do ?',
+          choices: [{ name: 'Create New Account', value: 'C' }, { name: 'Sign In', value: 'S' }],
+        },
+      ]);
+      return option;
+    }
 
 async function createNewAccount(): Promise<void> {
   enum Names {
@@ -36,39 +32,39 @@ async function createNewAccount(): Promise<void> {
   }
 
   async function inputs(name: Names, type: string): Promise<string | number> {
-    while (true) {
-      const { input } = await inquirer.prompt([
-        {
-          name: 'input',
-          message: `Enter Your ${name} : `,
-          type: type as any, // Fix the type casting issue
-        },
-      ]);
-
-      if (!input) {
-        continue;
-      }
-
-      if (name === Names.ContactNumber) {
-        let numRegex = /^(\+92|0|92)[0-9]{10}$/;
-        if (!numRegex.test(input)) {
-          console.log(chalk.redBright(`  Use Pakistani Number`));
-          continue;
+        while (true) {
+          const { input } = await inquirer.prompt([
+            {
+              name: 'input',
+              message: `Enter Your ${name} : `,
+              type: type as any, // Fix the type casting issue
+            },
+          ]);
+    
+          if (!input) {
+            continue;
+          }
+    
+          if (name === Names.ContactNumber) {
+            let numRegex = /^(\+92|0|92)[0-9]{10}$/;
+            if (!numRegex.test(input)) {
+              console.log(chalk.redBright(`  Use Pakistani Number`));
+              continue;
+            }
+          }
+    
+          if (name === Names.UserID) {
+            let customer = customers.find((val) => val.userId === input);
+            if (customer) {
+              console.log(chalk.redBright(`  This UserID Is Already Taken Try Different`));
+              continue;
+            }
+          }
+    
+          return input;
         }
       }
-
-      if (name === Names.UserID) {
-        let customer = customers.find((val) => val.userId === input);
-        if (customer) {
-          console.log(chalk.redBright(`  This UserID Is Already Taken Try Different`));
-          continue;
-        }
-      }
-
-      return input;
-    }
-  }
-
+      
   let name = (await inputs(Names.Name, 'string')) as string;
   let age = (await inputs(Names.Age, 'number')) as number;
   let contactNumber = (await inputs(Names.ContactNumber, 'string')) as string;
@@ -79,7 +75,9 @@ async function createNewAccount(): Promise<void> {
   await sleep();
   customers.push(customer);
   spinner.success({ text: chalk.whiteBright.bgRgb(0, 125, 17)(' Account Created Successfully ') });
+
 }
+
 
 async function signIn(): Promise<void> {
   const { userID, pin }: { userID: string; pin: number } = await inquirer.prompt([
@@ -102,7 +100,8 @@ async function signIn(): Promise<void> {
   if (!customer) {
     spinner.error({ text: chalk.whiteBright.bgRed(` No Customer With This UserID`) });
     return;
-  } else {
+  } 
+else {
     if (customer.pin !== pin) {
       spinner.error({ text: chalk.whiteBright.bgRed(` Incorrect PIN`) });
       return;
@@ -165,29 +164,32 @@ async function signIn(): Promise<void> {
   }
 }
 
+
 (async () => {
-  while (true) {
-    let userChoice = await choice();
-
-    if (userChoice === 'C') {
-      await createNewAccount();
-    } else if (userChoice === 'S') {
-      await signIn();
-    }
-
-    // EXIT PROGRAM CHOICE
-    const input = await inquirer.prompt([
-      {
-        name: chalk.rgb(255, 255, 160)(`Do You Want To Exit?`),
-        type: 'confirm',
-        default: false,
-      },
-    ]);
-    let value: boolean = await input['\x1B[38;2;255;255;160mDo You Want To Exit?\x1B[39m'];
-    if (value) {
-      break;
-    }
-    console.log(chalk.whiteBright('\n================================================================'));
-    console.log(chalk.whiteBright('================================================================\n'));
-  }
-})();
+      while (true) {
+        let userChoice = await choice();
+    
+        if (userChoice === 'C') {
+          await createNewAccount();
+        } else if (userChoice === 'S') {
+          await signIn();
+        }
+    
+        // EXIT PROGRAM CHOICE
+        const input = await inquirer.prompt([
+          {
+            name: "isExit",
+            message: chalk.rgb(255, 255, 160)(`Do You Want To Exit?`),
+            type: 'confirm',
+            default: false,
+          },
+        ]);
+        let value: boolean = await input['isExit'];
+        if (value) {
+          break;
+        }
+        console.log(chalk.whiteBright('\n================================================================'));
+        console.log(chalk.whiteBright('================================================================\n'));
+      }
+    })();
+    

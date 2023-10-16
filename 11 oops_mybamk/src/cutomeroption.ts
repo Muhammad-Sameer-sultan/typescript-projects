@@ -115,11 +115,5 @@ export function TransactionHistory(customer: any): void {
     }))
   );
 
-  // Alternatively, you can use forEach for custom formatting:
-  // customer.bankAccount.transactionHistory.forEach((val) => {
-  //     console.log(`\nTransaction Type   : ${val.type}`)
-  //     console.log(`Transaction Amount : RS: ${val.amount}`)
-  //     console.log(`Transaction Date   : ${val.date}`)
-  //     console.log(`Transaction Fee    : RS: ${val.fee}\n`)
-  // });
+  
 }
