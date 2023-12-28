@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // currencyConverter.ts
 import chalk from 'chalk';
 import inquirer from 'inquirer';

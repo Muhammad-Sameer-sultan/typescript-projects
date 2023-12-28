@@ -1,9 +1,10 @@
 {
-  "name": "04-todo-app",
-  "version": "1.0.0",
+  "name": "@muhammad_sameer/todo-app",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "type": "module",
+  "bin": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

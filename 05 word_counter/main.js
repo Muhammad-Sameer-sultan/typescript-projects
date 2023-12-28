@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import inquirer from "inquirer";
 const main = async () => {
     const { para } = await inquirer.prompt({

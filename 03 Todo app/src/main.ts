@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // import  Todo  from './Todo.js';
 import  TodoList  from './TodoList.js';
 import  inquirer from 'inquirer';

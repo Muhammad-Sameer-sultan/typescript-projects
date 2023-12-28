@@ -14,7 +14,7 @@ export default class TodoList {
 
     const newTodo: Todo = {
       
-      title: text,
+      Todo: text,
       completed: false
     };
 
@@ -58,7 +58,7 @@ export default class TodoList {
       const { text ,completed } = await inquirer.prompt([{
         type: 'input',
         name: 'text',
-        message: chalk.green('Enter the ID of the todo to Update:')
+        message: chalk.green('Enter the Todo  to Update:')
       },{
         type: 'list',
         name: 'completed',
@@ -69,7 +69,7 @@ export default class TodoList {
 
 
 
-      this.todos[todoIndex].title = text;
+      this.todos[todoIndex].Todo = text;
       this.todos[todoIndex].completed = completed==="Completed"?true:false;
      
       console.log(chalk.red("'Todo Updated successfully!'"));
@@ -83,9 +83,9 @@ export default class TodoList {
     // console.clear();
     let data=this.todos;
     console.log(`<=================        Your To do List            =================>`)
-    console.log(chalk.bgBlack(`ID--> Title Status`))
-    data.forEach((todo,index)=>{
-      console.log(chalk.bgGray(`${index} --> ${todo.title} Complete Status: ${todo.completed}`))
-    })
+    console.table(data)
+    // data.forEach((todo,index)=>{
+    //   console.log(chalk.bgGray(`${index} --> ${todo.title} Complete Status: ${todo.completed}`))
+    // })
   }
 }

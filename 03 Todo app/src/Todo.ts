@@ -1,5 +1,5 @@
 // Todo.ts
 export default class Todo {
-    constructor(public title: string, public completed: boolean = false) {}
+    constructor(public Todo: string, public completed: boolean = false) {}
   }
   

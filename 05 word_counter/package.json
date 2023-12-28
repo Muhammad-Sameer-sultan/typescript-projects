@@ -1,9 +1,10 @@
 {
-  "name": "word_counter",
+  "name": "@muhammad_sameer/word_counter",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
+  "bin": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
